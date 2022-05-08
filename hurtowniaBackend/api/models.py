@@ -9,26 +9,30 @@ class klienci(models.Model):
     nip_klienta  = models.CharField(max_length=10)
     miejscowosc_klienta = models.CharField(max_length=255)
 
-    class Meta:
-        ordering = ['id_klienta']
 
-    def __int__(self):
-        return self.id_klienta
 
 class produkty(models.Model):
     id_produktu = models.AutoField(primary_key=True)
     nazwa_produktu = models.CharField(max_length=255)
     cena_netto_za_sztuke = models.FloatField()
 
-    class Meta:
-        ordering = ['id_produktu']
-
-    def __int__(self):
-        return self.id_produktu
-
-
 class zamowienia(models.Model):
     id = models.AutoField(primary_key=True)
-    id_klienta = models.ManyToManyField(klienci )
-    id_produktu = models.ManyToManyField(produkty)
+    id_klienta = models.IntegerField()
+    id_produktu = models.IntegerField()
     ilosc = models.IntegerField()
+
+class faktura(models.Model):
+    id = models.AutoField(primary_key=True)
+    nazwa_klienta = models.CharField(max_length=255)
+    nip_klienta  = models.CharField(max_length=10)
+    miejscowosc_klienta = models.CharField(max_length=255)
+    nazwa_produktu = models.CharField(max_length=255)
+    cena_netto_za_sztuke = models.FloatField()
+    cena_netto = models.FloatField()
+    podatek_vat = models.FloatField()
+    cena_brutto = models.FloatField()
+
+
+
+
